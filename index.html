@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        .app{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        input{
+            margin-bottom: 10px;
+        }
+        #error {
+            display: none;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="app">
+        <p>Insira seu codigo de identificacao</p>
+        <input id="userId" type="text" placeholder="login">
+        <div id="error"></div>
+        <button onclick="login()">entrar</button>
+    </div>
+
+    <script src="form.js"></script>
+    
+</body>
+</html>
