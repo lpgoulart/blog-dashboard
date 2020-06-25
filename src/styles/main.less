@@ -56,17 +56,23 @@ aside {
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid black;
-            #home, #config, #posts, #addPost {
+            transition: all .5s;
+            #home, #config, #posts, #addPost, #logoff {
                 transition: .5s;
             }
             i {
                 font-size: 20px;
                 padding-left: 20px;
+                margin-right: 10px;
+                width: 35px;
             }
             span {
                 font-size: 16px;
                 margin-left: 25px;
                 white-space: nowrap;
+            }
+            &:hover {
+                background: #1b1e24;
             }
         }
     }
@@ -108,6 +114,9 @@ footer {
 }
 .d-none {
     display: none;
+}
+.selectedPage {
+    background: #1b1e24;
 }
 
 #homepage {

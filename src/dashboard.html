@@ -28,10 +28,11 @@
         <div style="display: flex; background: white; width: 100%; height: calc(100vh - 64px);">
             <aside id="aside">
                 <ul>
-                    <li onclick="navigate('home')" style="border-top: 2px solid black;"><i class="fas fa-th"></i><span id="home">HOME</span></li>
-                    <li onclick="navigate('posts');"><i class="far fa-edit"></i><span id="posts">POSTS</span></li>
-                    <li onclick="navigate('new');newPostForm()"><i class="fas fa-portrait"></i><span id="addPost">New Post</span></li>
-                    <li onclick="navigate('config')"><i class="fas fa-cogs"></i><span id="config">CONFIG</span></li>
+                    <li id="lihome" onclick="navigate('home')" style="border-top: 2px solid black;"><i class="fas fa-th"></i><span id="home">Home</span></li>
+                    <li id="liposts" onclick="navigate('posts');"><i class="far fa-edit"></i><span id="posts">Post</span></li>
+                    <li id="liadd" onclick="navigate('new');newPostForm()"><i class="fas fa-portrait"></i><span id="addPost">New Post</span></li>
+                    <li id="liconfig" onclick="navigate('config')"><i class="fas fa-cogs"></i><span id="config">Config</span></li>
+                    <li onclick="navigate('logoff')"><i class="fas fa-door-open"></i></i><span id="logoff">Logoff</span></li>
                 </ul>
             </aside>
             <div style="display: flex; flex-direction: column; width:100%">
@@ -86,6 +87,7 @@
     
 
     <script src="./js/form.js"></script>
+    <script src="./js/login.js"></script>
     <script src="./js/iteractions.js"></script>
     <script src="./js/newPost.js"></script>
     <script src="./js/editPost.js"></script>

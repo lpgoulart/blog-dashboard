@@ -9,6 +9,7 @@ function toggleMenu() {
     document.getElementById('posts').classList.toggle('o-none')
     document.getElementById('config').classList.toggle('o-none')
     document.getElementById('addPost').classList.toggle('o-none')
+    document.getElementById('logoff').classList.toggle('o-none')
 
 }
 

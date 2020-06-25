@@ -11,6 +11,11 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.add('d-none')
             document.getElementById('configurations').classList.add('d-none')
+
+            document.getElementById('lihome').classList.add('selectedPage')
+            document.getElementById('liposts').classList.remove('selectedPage')
+            document.getElementById('liadd').classList.remove('selectedPage')
+            document.getElementById('liconfig').classList.remove('selectedPage')
         break;
         case 'posts': 
             document.getElementById('welcome').classList.add('d-none')
@@ -18,6 +23,11 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.add('d-none')
             document.getElementById('configurations').classList.add('d-none')
+
+            document.getElementById('lihome').classList.remove('selectedPage')
+            document.getElementById('liposts').classList.add('selectedPage')
+            document.getElementById('liadd').classList.remove('selectedPage')
+            document.getElementById('liconfig').classList.remove('selectedPage')
         break;
         case 'new': 
             document.getElementById('welcome').classList.add('d-none')
@@ -25,7 +35,13 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.remove('d-none')
             document.getElementById('configurations').classList.add('d-none')
+            
             newPostForm()
+
+            document.getElementById('lihome').classList.remove('selectedPage')
+            document.getElementById('liposts').classList.remove('selectedPage')
+            document.getElementById('liadd').classList.add('selectedPage')
+            document.getElementById('liconfig').classList.remove('selectedPage')
         break;
         case 'edit': 
             document.getElementById('welcome').classList.add('d-none')
@@ -40,48 +56,15 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.add('d-none')
             document.getElementById('configurations').classList.remove('d-none')
+
+            document.getElementById('lihome').classList.remove('selectedPage')
+            document.getElementById('liposts').classList.remove('selectedPage')
+            document.getElementById('liadd').classList.remove('selectedPage')
+            document.getElementById('liconfig').classList.add('selectedPage')
         break;
+        case 'logoff':
+            window.location.href = "index.html"
     }
-}
-
-async function login() {
-    id = document.getElementById('userId').value
-    error = document.getElementById('error')
-    error.style.display = "block"
-
-    if(id != "") {
-        await fetch(`http://localhost:3333/api/users/${id}`, {method: 'GET'})
-        .then(response => {
-            if(response.ok) {
-                response.json().then(data => {
-                    error.innerHTML = "Bem vindo, " + data.username
-                })
-                
-                setTimeout(()=>{
-                    window.location.href = `dashboard.html?id=${id}`
-                },2000)
-            }
-            else {
-                error.innerHTML = "ID incorreto"
-            }
-        })
-    }
-    else {
-        error.innerHTML = "Campo Vazio"
-    }
-}
-
-async function loggedUser() {
-    const urlParams = new URLSearchParams(window.location.search);
-    userId = urlParams.get('id');
-    // console.log(id)
-
-    await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
-        .then(response => response.json()
-            .then(data => {
-                // console.log(data)
-            })
-        )
 }
 
 function addRef() {
