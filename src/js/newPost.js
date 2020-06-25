@@ -12,9 +12,7 @@ function submit() {
         img: _img,
         refs: array
     }
-
-    document.getElementById('allPosts').style.display = 'block'
-    document.getElementById('newPostDiv').style.display = 'none'
+    navigate('posts')
     newPost(data)
 }
 
@@ -23,15 +21,18 @@ function newPostForm() {
     const div = document.getElementById('newForm')
 
     content = `
-        <input type="text" placeholder="title" id="title"> <br>
-        <textarea placeholder="simple description" id="brief"></textarea>
-        <div id="content"></div> <br>
-        <input type="text" placeholder="img url" id="img"><br>
-        <input type="text" id="refs"> <button onclick="addRef()">add</button><br>
-        <div id="refDisplay">
-            
+    <div class="form">
+        <input type="text" placeholder="title" id="title"> 
+        <textarea placeholder="simple description" id="brief" rows="4"></textarea>
+        <div id="content"></div> 
+        <input type="text" placeholder="img url" id="img">
+        <div style="display: flex; align-items: center;">
+            <input style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0" type="text" id="refs"> 
+            <button class="edit" style="width: auto; height: 38px;border-top-left-radius: 0; border-bottom-left-radius: 0" onclick="addRef()">add</button>
         </div>
-        <button id="submitForm" onclick="submit()">submit</button>
+        <div id="refDisplay"></div>
+        <button id="submitForm" class="edit" onclick="submit()">submit</button>
+    </div>
     `
 
     div.innerHTML = content
@@ -45,7 +46,7 @@ function newPostForm() {
             ]
         },
         placeholder: 'Compose an epic...',
-        theme: 'snow'  // or 'bubble'
+        theme: 'snow' 
     });
 }
 

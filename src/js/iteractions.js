@@ -16,7 +16,6 @@ function excluirConfirmation(id) {
     var modal = document.getElementById("myModal");
 
     const content = `
-    
         <div class="modal-content">
             <span class="close">&times;</span>
             <div>

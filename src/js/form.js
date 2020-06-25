@@ -24,6 +24,7 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.remove('d-none')
             document.getElementById('configurations').classList.add('d-none')
+            newPostForm()
         break;
         case 'edit': 
             document.getElementById('welcome').classList.add('d-none')
@@ -98,20 +99,35 @@ function addRef() {
     }
 }
 
-function editForm(postId) {
+async function editForm(postId) {
+
+    console.log(postId)
+
+    let post
+
+    await fetch(`http://localhost:3333/api/users/${userId}/${postId}`, {method: 'GET'})
+        .then(response => response.json()
+            .then(data => {
+                console.log(data)
+                post = data
+            })
+        )
 
     const div = document.getElementById('form')
 
     content = `
-        <input type="text" placeholder="title" id="title"> <br>
-        <textarea placeholder="simple description" id="brief"></textarea>
-        <div id="contentEdit"></div> <br>
-        <input type="text" placeholder="img url" id="img"><br>
-        <input type="text" id="refs"> <button onclick="addRef()">add</button><br>
-        <div id="refDisplay">
-            
+        <div class="form">
+            <input type="text" placeholder="title" id="titleEdited"> 
+            <textarea placeholder="simple description" id="briefEdited" rows="4"></textarea>
+            <div id="contentEdit"></div> 
+            <input type="text" placeholder="img url" id="imgEdited">
+            <div style="display: flex; align-items: center;">
+                <input style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0" type="text" id="refsEdited"> 
+                <button class="edit" style="width: auto; height: 38px;border-top-left-radius: 0; border-bottom-left-radius: 0" onclick="addRef()">add</button>
+            </div>
+            <div id="refDisplayEdited"></div>
+            <button id="submitFormEdited" class="edit" onclick="submitEdited(${postId})">submit</button>
         </div>
-        <button id="submitForm" onclick="submit()">submit</button>
     `
 
     div.innerHTML = content
@@ -127,6 +143,32 @@ function editForm(postId) {
         placeholder: 'Compose an epic...',
         theme: 'snow'  // or 'bubble'
     });
+
+    document.getElementById('titleEdited').value = post.title
+    document.getElementById('briefEdited').value = post.brief
+    quill.root.innerHTML = post.content
+    document.getElementById('imgEdited').value = post.img
+    document.getElementById('refsEdited').value =post.refs
+
+    
+}
+
+function submit() {
+    _title = document.getElementById('titleEdited').value
+    _brief = document.getElementById('briefEdited').value
+    _content = quill.root.innerHTML
+    _img = document.getElementById('imgEdited').value
+    _refs = document.getElementById('refsEdited').value
+
+    data = {
+        title: _title,
+        brief: _brief,
+        content: _content,
+        img: _img,
+        refs: array
+    }
+    navigate('posts')
+    newPost(data)
 }
 
 async function fetchData() {
@@ -154,7 +196,7 @@ function addPost(post) {
                 <img src="${item.img}" alt="post img" width="100%">
                 <h3>${item.title}</h3>
                 <div>
-                    <button class="edit" onclick="navigate('edit'); editForm()"><i class="far fa-edit"></i> Editar</button>
+                    <button class="edit" onclick="navigate('edit'); editForm('${item.id}')"><i class="far fa-edit"></i> Editar</button>
                     <button class="delete" onclick="excluirConfirmation('${item.id}')"><i class="far fa-trash-alt"></i> Deletar</button>
                 </div>
 
