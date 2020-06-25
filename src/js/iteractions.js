@@ -2,10 +2,13 @@ function toggleMenu() {
     console.log('aqui')
     document.getElementById('aside').classList.toggle('w-100')
     document.getElementById('logo').classList.toggle('w-100')
+    document.getElementById('main').classList.toggle('w-main-100')
 
-    document.getElementById('home').classList.toggle('d-none')
-    document.getElementById('posts').classList.toggle('d-none')
-    document.getElementById('config').classList.toggle('d-none')
+
+    document.getElementById('home').classList.toggle('o-none')
+    document.getElementById('posts').classList.toggle('o-none')
+    document.getElementById('config').classList.toggle('o-none')
+    document.getElementById('addPost').classList.toggle('o-none')
 
 }
 
@@ -50,3 +53,20 @@ function closeModal() {
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
 }
+
+// var options = {
+//     chart: {
+//       type: 'bar'
+//     },
+//     series: [{
+//       name: 'sales',
+//       data: [30,40,45,50,49,60,70,91,125]
+//     }],
+//     xaxis: {
+//       categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+//     }
+//   }
+  
+//   var chart = new ApexCharts(document.querySelector("#chart"), options);
+  
+//   chart.render();

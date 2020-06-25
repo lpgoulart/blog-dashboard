@@ -12,9 +12,9 @@
     <link rel="stylesheet/less" type="text/css" href="./styles/main.less" />
     <link rel="stylesheet/less" type="text/css" href="./styles/functionalities.less" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-<body onload="loggedUser();fetchData()">
+<body onload="loggedUser();fetchData(); navigate('home')">
 
     <div id="app">
         <header>
@@ -28,30 +28,46 @@
         <div style="display: flex; background: white; width: 100%; height: calc(100vh - 64px);">
             <aside id="aside">
                 <ul>
-                    <li style="border-top: 2px solid black;"><i class="fas fa-th"></i><span id="home">HOME</span></li>
-                    <li><i class="far fa-edit"></i><span id="posts">POSTS</span></li>
-                    <li><i class="fas fa-portrait"></i><span id="config">CONFIG</span></li>
+                    <li onclick="navigate('home')" style="border-top: 2px solid black;"><i class="fas fa-th"></i><span id="home">HOME</span></li>
+                    <li onclick="navigate('posts');"><i class="far fa-edit"></i><span id="posts">POSTS</span></li>
+                    <li onclick="navigate('new');newPostForm()"><i class="fas fa-portrait"></i><span id="addPost">New Post</span></li>
+                    <li onclick="navigate('config')"><i class="fas fa-cogs"></i><span id="config">CONFIG</span></li>
                 </ul>
             </aside>
             <div style="display: flex; flex-direction: column; width:100%">
-                <main>
+                <main id="main">
 
-                    <!-- <div id="welcome">
+                    <div id="welcome">
+                        <h1>welcome</h1>
+                    </div>
 
-                    </div> -->
 
 
-
-                    <div id="allPosts">
+                    <div id="allPosts" class="d-none">
 
                         <h1>All Posts</h1>
 
                         <div id="postsHere"></div>
+
+                        <!-- <div style="height: 200px; width: 500px;">
+                            <div id="chart">
+                            </div>
+                        </div> -->
                     </div>
 
-                    <!-- <div id="configurations">
- 
-                    </div>  -->
+                    <div id="editPost" class="d-none">
+                        <h1>edit</h1>
+                        <div id="form"></div>
+                    </div>
+
+                    <div id="newPostDiv" class="d-none">
+                        <h1>new post</h1>
+                        <div id="newForm"></div>
+                    </div>
+
+                    <div id="configurations" class="d-none">
+                        <h1>Config</h1>
+                    </div> 
 
 
 
@@ -66,17 +82,16 @@
     </div>
     
 
-
-    <!-- <div id="form"></div> -->
-
     <script src="./js/form.js"></script>
     <script src="./js/iteractions.js"></script>
+    <script src="./js/newPost.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js" ></script>
+    
 
 </body>
 </html>

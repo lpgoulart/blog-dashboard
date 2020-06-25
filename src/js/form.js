@@ -1,6 +1,51 @@
 var quill = null
 let userId = ""
 
+function navigate(to) {
+    console.log(to)
+    switch(to){
+        case 'home': 
+            document.getElementById('welcome').classList.remove('d-none')
+            document.getElementById('allPosts').classList.add('d-none')
+            document.getElementById('editPost').classList.add('d-none')
+            document.getElementById('newPostDiv').classList.add('d-none')
+            document.getElementById('configurations').classList.add('d-none')
+        break;
+        case 'posts': 
+            document.getElementById('welcome').classList.add('d-none')
+            document.getElementById('allPosts').classList.remove('d-none')
+            document.getElementById('editPost').classList.add('d-none')
+            document.getElementById('newPostDiv').classList.add('d-none')
+            document.getElementById('configurations').classList.add('d-none')
+        break;
+        case 'new': 
+            document.getElementById('welcome').classList.add('d-none')
+            document.getElementById('allPosts').classList.add('d-none')
+            document.getElementById('editPost').classList.add('d-none')
+            document.getElementById('newPostDiv').classList.remove('d-none')
+            document.getElementById('configurations').classList.add('d-none')
+        break;
+        case 'edit': 
+            document.getElementById('welcome').classList.add('d-none')
+            document.getElementById('allPosts').classList.add('d-none')
+            document.getElementById('editPost').classList.remove('d-none')
+            document.getElementById('newPostDiv').classList.add('d-none')
+            document.getElementById('configurations').classList.add('d-none')
+        break;
+        case 'config': 
+            document.getElementById('welcome').classList.add('d-none')
+            document.getElementById('allPosts').classList.add('d-none')
+            document.getElementById('editPost').classList.add('d-none')
+            document.getElementById('newPostDiv').classList.add('d-none')
+            document.getElementById('configurations').classList.remove('d-none')
+        break;
+    }
+}
+
+function navPosts() {
+
+}
+
 async function login() {
     id = document.getElementById('userId').value
     error = document.getElementById('error')
@@ -41,43 +86,6 @@ async function loggedUser() {
         )
 }
 
-async function newPost(data) {
-    await fetch(`http://localhost:3333/api/users/${userId}/post`, 
-    {
-        method:"POST",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-        }).then(data => {return data.json()})
-            .then(res=> {
-                console.log(res)
-        })
-        .catch(error => console.log(error))
-        document.getElementById('posts').innerHTML = ""
-        fetchData()
-    
-}
-
-function submit() {
-    _title = document.getElementById('title').value
-    _brief = document.getElementById('brief').value
-    _content = quill.root.innerHTML
-    _img = document.getElementById('img').value
-    _refs = document.getElementById('refs').value
-
-    data = {
-        title: _title,
-        brief: _brief,
-        content: _content,
-        img: _img,
-        refs: array
-    }
-    newPost(data)
-    clearForm()
-}
-
 let array = []
 
 function addRef() {
@@ -90,13 +98,14 @@ function addRef() {
     }
 }
 
-function clearForm() {
+function editForm(postId) {
+
     const div = document.getElementById('form')
 
     content = `
         <input type="text" placeholder="title" id="title"> <br>
         <textarea placeholder="simple description" id="brief"></textarea>
-        <div id="content"></div> <br>
+        <div id="contentEdit"></div> <br>
         <input type="text" placeholder="img url" id="img"><br>
         <input type="text" id="refs"> <button onclick="addRef()">add</button><br>
         <div id="refDisplay">
@@ -107,7 +116,7 @@ function clearForm() {
 
     div.innerHTML = content
 
-    quill = new Quill('#content', {
+    quill = new Quill('#contentEdit', {
         modules: {
             toolbar: [
             [{ header: [1, 2, false] }],
@@ -137,12 +146,15 @@ function addPost(post) {
     console.log(post)
 
     post.map(item => {
+        // date = new Date(item.createdAt)
+        // value = date.getDate() + "/" + date.getMonth()
+
         contentt = `
             <div class="card" id="${item.id}">
                 <img src="${item.img}" alt="post img" width="100%">
                 <h3>${item.title}</h3>
                 <div>
-                    <button class="edit" onclick="editar()"><i class="far fa-edit"></i> Editar</button>
+                    <button class="edit" onclick="navigate('edit'); editForm()"><i class="far fa-edit"></i> Editar</button>
                     <button class="delete" onclick="excluirConfirmation('${item.id}')"><i class="far fa-trash-alt"></i> Deletar</button>
                 </div>
 

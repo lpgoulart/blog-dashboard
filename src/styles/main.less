@@ -11,6 +11,7 @@ html, body {
     height: 100vh;
     width: 100%;
     background: red;
+    overflow: hidden;
 }
 
 header {
@@ -52,17 +53,20 @@ aside {
             display: flex;
             align-items: center;
             padding: 15px;
+            overflow: hidden;
+            cursor: pointer;
             border-bottom: 2px solid black;
-            #home, #config, #posts {
+            #home, #config, #posts, #addPost {
                 transition: .5s;
             }
             i {
-                font-size: 25px;
+                font-size: 20px;
                 padding-left: 20px;
             }
             span {
-                font-size: 20px;
+                font-size: 16px;
                 margin-left: 25px;
+                white-space: nowrap;
             }
         }
     }
@@ -70,9 +74,14 @@ aside {
 
 main {
     height: calc(100vh - 128px);
-    width: 100%;
+    width: calc(100vw - 250px);
     overflow: auto;
     background: #EEE;
+    transition: all .5s;
+}
+
+.w-main-100 {
+    width: calc(100vw - 100px);
 }
 
 #postsHere {
@@ -90,10 +99,12 @@ footer {
 .w-100 {
     width: 100px!important;
 }
-.d-none {
+.o-none {
     opacity: 0;
 }
-
+.d-none {
+    display: none;
+}
 
 #homepage {
     margin: 15px;
@@ -144,3 +155,10 @@ footer {
         background: #a80917;
     }
 }
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
