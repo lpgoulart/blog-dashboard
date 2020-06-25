@@ -1,21 +1,3 @@
-function submit() {
-    _title = document.getElementById('title').value
-    _brief = document.getElementById('brief').value
-    _content = quill.root.innerHTML
-    _img = document.getElementById('img').value
-    _refs = document.getElementById('refs').value
-
-    data = {
-        title: _title,
-        brief: _brief,
-        content: _content,
-        img: _img,
-        refs: array
-    }
-    navigate('posts')
-    newPost(data)
-}
-
 function newPostForm() {
 
     const div = document.getElementById('newForm')
@@ -48,6 +30,24 @@ function newPostForm() {
         placeholder: 'Compose an epic...',
         theme: 'snow' 
     });
+}
+
+function submit() {
+    _title = document.getElementById('title').value
+    _brief = document.getElementById('brief').value
+    _content = quill.root.innerHTML
+    _img = document.getElementById('img').value
+    _refs = document.getElementById('refs').value
+
+    data = {
+        title: _title,
+        brief: _brief,
+        content: _content,
+        img: _img,
+        refs: array
+    }
+    navigate('posts')
+    newPost(data)
 }
 
 async function newPost(data) {

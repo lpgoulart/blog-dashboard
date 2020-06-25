@@ -1,8 +1,9 @@
 var quill = null
 let userId = ""
+let post
+let array = []
 
 function navigate(to) {
-    console.log(to)
     switch(to){
         case 'home': 
             document.getElementById('welcome').classList.remove('d-none')
@@ -43,10 +44,6 @@ function navigate(to) {
     }
 }
 
-function navPosts() {
-
-}
-
 async function login() {
     id = document.getElementById('userId').value
     error = document.getElementById('error')
@@ -82,12 +79,10 @@ async function loggedUser() {
     await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
-                console.log(data)
+                // console.log(data)
             })
         )
 }
-
-let array = []
 
 function addRef() {
     array.push(document.getElementById('refs').value)
@@ -99,84 +94,12 @@ function addRef() {
     }
 }
 
-async function editForm(postId) {
-
-    console.log(postId)
-
-    let post
-
-    await fetch(`http://localhost:3333/api/users/${userId}/${postId}`, {method: 'GET'})
-        .then(response => response.json()
-            .then(data => {
-                console.log(data)
-                post = data
-            })
-        )
-
-    const div = document.getElementById('form')
-
-    content = `
-        <div class="form">
-            <input type="text" placeholder="title" id="titleEdited"> 
-            <textarea placeholder="simple description" id="briefEdited" rows="4"></textarea>
-            <div id="contentEdit"></div> 
-            <input type="text" placeholder="img url" id="imgEdited">
-            <div style="display: flex; align-items: center;">
-                <input style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0" type="text" id="refsEdited"> 
-                <button class="edit" style="width: auto; height: 38px;border-top-left-radius: 0; border-bottom-left-radius: 0" onclick="addRef()">add</button>
-            </div>
-            <div id="refDisplayEdited"></div>
-            <button id="submitFormEdited" class="edit" onclick="submitEdited(${postId})">submit</button>
-        </div>
-    `
-
-    div.innerHTML = content
-
-    quill = new Quill('#contentEdit', {
-        modules: {
-            toolbar: [
-            [{ header: [1, 2, false] }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block']
-            ]
-        },
-        placeholder: 'Compose an epic...',
-        theme: 'snow'  // or 'bubble'
-    });
-
-    document.getElementById('titleEdited').value = post.title
-    document.getElementById('briefEdited').value = post.brief
-    quill.root.innerHTML = post.content
-    document.getElementById('imgEdited').value = post.img
-    document.getElementById('refsEdited').value =post.refs
-
-    
-}
-
-function submit() {
-    _title = document.getElementById('titleEdited').value
-    _brief = document.getElementById('briefEdited').value
-    _content = quill.root.innerHTML
-    _img = document.getElementById('imgEdited').value
-    _refs = document.getElementById('refsEdited').value
-
-    data = {
-        title: _title,
-        brief: _brief,
-        content: _content,
-        img: _img,
-        refs: array
-    }
-    navigate('posts')
-    newPost(data)
-}
-
 async function fetchData() {
-    console.log(userId)
+    // console.log(userId)
     await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 addPost(data.posts.items)
             })
         )
@@ -185,7 +108,7 @@ async function fetchData() {
 function addPost(post) {
     const div = document.getElementById('postsHere')
 
-    console.log(post)
+    // console.log(post)
 
     post.map(item => {
         // date = new Date(item.createdAt)
