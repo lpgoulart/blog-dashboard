@@ -1,7 +1,7 @@
 var quill = null
-let userId = ""
+let userId
 let post
-let array = []
+let user
 
 function navigate(to) {
     switch(to){
@@ -11,6 +11,8 @@ function navigate(to) {
             document.getElementById('editPost').classList.add('d-none')
             document.getElementById('newPostDiv').classList.add('d-none')
             document.getElementById('configurations').classList.add('d-none')
+
+            loadTypes()
 
             document.getElementById('lihome').classList.add('selectedPage')
             document.getElementById('liposts').classList.remove('selectedPage')
@@ -57,6 +59,8 @@ function navigate(to) {
             document.getElementById('newPostDiv').classList.add('d-none')
             document.getElementById('configurations').classList.remove('d-none')
 
+            getConfig()
+
             document.getElementById('lihome').classList.remove('selectedPage')
             document.getElementById('liposts').classList.remove('selectedPage')
             document.getElementById('liadd').classList.remove('selectedPage')
@@ -67,14 +71,41 @@ function navigate(to) {
     }
 }
 
-function addRef() {
-    array.push(document.getElementById('refs').value)
-    console.log(array)
-    const div = document.getElementById('refDisplay')
-    div.innerHTML=""
-    for (let index = 0; index < array.length; index++) {
-        div.innerHTML += `<span>${array[index]}</span> `
-    }
+async function getConfig() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    userId = urlParams.get('id');
+
+    await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
+        .then(response => response.json()
+            .then(data => {
+                user = data
+            })
+        )
+
+    const div = document.getElementById('userConfig');
+    
+    const content = 
+    `
+        <div class="userImg">
+            <div style="width: 200px; height: 200px; border-radius: 100px; display: flex; justify-content: center;align-items: center;">
+                <i style="font-size: 200px;" class="far fa-user-circle"></i>
+            </div>
+            <br>
+            <span>${user.username}</span>
+        </div>
+        <div class="userInfo">
+            <span><strong>Num. de posts:</strong> ${user.posts.items_total}</span>
+            <span><strong>Conteúdo:</strong> ${user.content_type}</span>
+        </div>
+        <div style="text-align:center">
+            <span>chave de acesso</span>
+            <br>
+            <span>${user.id}</span>
+        </div>
+    `
+    div.innerHTML = content
+
 }
 
 async function fetchData() {

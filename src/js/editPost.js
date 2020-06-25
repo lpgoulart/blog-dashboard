@@ -12,15 +12,11 @@ async function editForm(postId) {
     const div = document.getElementById('form')
     const content = `
         <div class="form">
-            <input type="text" placeholder="title" id="titleEdited"> 
-            <textarea placeholder="simple description" id="briefEdited" rows="4"></textarea>
+            <input type="text" placeholder="Cover Image: URL" id="imgEdited" value="${post.img}">
+            <input type="text" placeholder="title" id="titleEdited" value="${post.title}"> 
+            <textarea placeholder="simple description" id="briefEdited" rows="4">${post.brief}</textarea>
             <div id="contentEdit"></div> 
-            <input type="text" placeholder="img url" id="imgEdited">
-            <div style="display: flex; align-items: center;">
-                <input style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0" type="text" id="refsEdited"> 
-                <button class="edit" style="width: auto; height: 38px;border-top-left-radius: 0; border-bottom-left-radius: 0" onclick="addRef()">add</button>
-            </div>
-            <div id="refDisplayEdited"></div>
+            <input type="text" id="refsEdited" placeholder="Content type" value="${post.type}"> 
             <button id="submitFormEdited" class="edit" onclick="submitEdited('${postId}')">Salvar Edição</button>
             <div style="text-align:center; margin-top: 10px"><button class="delete" onclick="navigate('posts')">Cancelar</button></div>
         </div>
@@ -38,18 +34,14 @@ async function editForm(postId) {
         theme: 'snow' 
     });
 
-    document.getElementById('titleEdited').value = post.title
-    document.getElementById('briefEdited').value = post.brief
     quill.root.innerHTML = post.content
-    document.getElementById('imgEdited').value = post.img
-    document.getElementById('refDisplayEdited').innerHTML = post.refs
 }
 async function submitEdited(id) {
     _title = document.getElementById('titleEdited').value
     _brief = document.getElementById('briefEdited').value
     _content = quill.root.innerHTML
     _img = document.getElementById('imgEdited').value
-    _refs = document.getElementById('refsEdited').value
+    _type = document.getElementById('refsEdited').value
 
     console.log(id)
 
@@ -60,7 +52,7 @@ async function submitEdited(id) {
         brief: _brief,
         content: _content,
         img: _img,
-        refs: array
+        type: _type
     }
     navigate('posts')
     editSinglePost(data, id)

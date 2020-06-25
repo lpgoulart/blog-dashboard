@@ -4,16 +4,13 @@ function newPostForm() {
 
     content = `
     <div class="form">
-        <input type="text" placeholder="title" id="title"> 
+        <input type="text" placeholder="Cover Image: URL" id="img">
+        <input type="text" placeholder="title" id="title">
         <textarea placeholder="simple description" id="brief" rows="4"></textarea>
         <div id="content"></div> 
-        <input type="text" placeholder="img url" id="img">
-        <div style="display: flex; align-items: center;">
-            <input style="flex: 1; border-top-right-radius: 0; border-bottom-right-radius: 0" type="text" id="refs"> 
-            <button class="edit" style="width: auto; height: 38px;border-top-left-radius: 0; border-bottom-left-radius: 0" onclick="addRef()">add</button>
-        </div>
-        <div id="refDisplay"></div>
+        <input type="text" id="refs" placeholder="content type">  
         <button id="submitForm" class="edit" onclick="submit()">submit</button>
+        <div style="text-align:center; margin-top: 10px"><button class="delete" onclick="navigate('posts')">Cancelar</button></div>
     </div>
     `
 
@@ -37,14 +34,14 @@ function submit() {
     _brief = document.getElementById('brief').value
     _content = quill.root.innerHTML
     _img = document.getElementById('img').value
-    _refs = document.getElementById('refs').value
+    _type = document.getElementById('refs').value
 
     data = {
         title: _title,
         brief: _brief,
         content: _content,
         img: _img,
-        refs: array
+        type: _type
     }
     navigate('posts')
     newPost(data)
