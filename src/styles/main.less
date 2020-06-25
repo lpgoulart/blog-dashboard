@@ -1,0 +1,146 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#app {
+    height: 100vh;
+    width: 100%;
+    background: red;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    background: #282c34;
+
+    #logo {
+        transition: .5s;
+        width: 250px;
+        background: #282c34;
+        height: 64px;
+    }
+    .style {
+        i {
+            cursor: pointer;
+            padding-left: 20px;
+            color: rgba(255, 255, 255, .75);
+            font-size: 25px;
+        }
+    }
+}
+
+aside {
+    height: calc(100vh - 64px);
+    width: 286px;
+    background: #282c34;
+    transition: .5s;
+    color: rgba(255, 255, 255, .75);
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        border: 0;
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 2px solid black;
+            #home, #config, #posts {
+                transition: .5s;
+            }
+            i {
+                font-size: 25px;
+                padding-left: 20px;
+            }
+            span {
+                font-size: 20px;
+                margin-left: 25px;
+            }
+        }
+    }
+}
+
+main {
+    height: calc(100vh - 128px);
+    width: 100%;
+    overflow: auto;
+    background: #EEE;
+}
+
+#postsHere {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+footer {
+    background: green;
+    height: 64px;
+}
+
+.w-100 {
+    width: 100px!important;
+}
+.d-none {
+    opacity: 0;
+}
+
+
+#homepage {
+    margin: 15px;
+    background: red;
+    
+}
+
+.card {
+    width: 20%;
+    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    h3 {
+        margin: 15px;
+    }
+    div {
+        display: flex;
+        width: 100%;
+    }
+    button {
+        padding: 15px;
+        width: 50%;
+        border: 0;
+        cursor: pointer;
+    }
+
+}
+
+.edit {
+    background: #43ee5a;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: all .5s;
+    &:hover {
+        background: #38c94b;
+    }
+}
+.delete {
+    background: #e40000;
+    color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all .5s;
+    &:hover {
+        background: #a80917;
+    }
+}

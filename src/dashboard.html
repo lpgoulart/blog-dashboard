@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.bubble.css">
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+    <link rel="stylesheet/less" type="text/css" href="./styles/main.less" />
+    <link rel="stylesheet/less" type="text/css" href="./styles/functionalities.less" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
+</head>
+<body onload="loggedUser();fetchData()">
+
+    <div id="app">
+        <header>
+            <div id="logo">
+                
+            </div>
+            <div class="style">
+                <i class="fas fa-bars" onclick="toggleMenu()"></i>
+            </div>
+        </header>
+        <div style="display: flex; background: white; width: 100%; height: calc(100vh - 64px);">
+            <aside id="aside">
+                <ul>
+                    <li style="border-top: 2px solid black;"><i class="fas fa-th"></i><span id="home">HOME</span></li>
+                    <li><i class="far fa-edit"></i><span id="posts">POSTS</span></li>
+                    <li><i class="fas fa-portrait"></i><span id="config">CONFIG</span></li>
+                </ul>
+            </aside>
+            <div style="display: flex; flex-direction: column; width:100%">
+                <main>
+
+                    <!-- <div id="welcome">
+
+                    </div> -->
+
+
+
+                    <div id="allPosts">
+
+                        <h1>All Posts</h1>
+
+                        <div id="postsHere"></div>
+                    </div>
+
+                    <!-- <div id="configurations">
+ 
+                    </div>  -->
+
+
+
+                </main>
+                <footer></footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        
+    </div>
+    
+
+
+    <!-- <div id="form"></div> -->
+
+    <script src="./js/form.js"></script>
+    <script src="./js/iteractions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js" ></script>
+
+</body>
+</html>

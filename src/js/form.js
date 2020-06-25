@@ -119,3 +119,43 @@ function clearForm() {
         theme: 'snow'  // or 'bubble'
     });
 }
+
+async function fetchData() {
+    console.log(userId)
+    await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
+        .then(response => response.json()
+            .then(data => {
+                console.log(data)
+                addPost(data.posts.items)
+            })
+        )
+}
+
+function addPost(post) {
+    const div = document.getElementById('postsHere')
+
+    console.log(post)
+
+    post.map(item => {
+        contentt = `
+            <div class="card" id="${item.id}">
+                <img src="${item.img}" alt="post img" width="100%">
+                <h3>${item.title}</h3>
+                <div>
+                    <button class="edit" onclick="editar()"><i class="far fa-edit"></i> Editar</button>
+                    <button class="delete" onclick="excluirConfirmation('${item.id}')"><i class="far fa-trash-alt"></i> Deletar</button>
+                </div>
+
+            </div>
+        `
+        div.innerHTML += contentt
+    })
+
+}
+
+async function excluir(postId) {
+    await fetch(`http://localhost:3333/api/users/${userId}/${postId}`, {method: 'DELETE'})
+    document.getElementById('postsHere').innerHTML = ""
+    fetchData()
+
+}
