@@ -10,7 +10,7 @@ async function loadTypes() {
   const urlParams = new URLSearchParams(window.location.search);
   userId = urlParams.get('id');
 
-  await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
+  await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}`, {method: 'GET'})
     .then(response => response.json()
         .then(data => {
             user = data

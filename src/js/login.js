@@ -4,7 +4,7 @@ async function login() {
     error.style.display = "block"
 
     if(id != "") {
-        await fetch(`http://localhost:3333/api/users/${id}`, {method: 'GET'})
+        await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${id}`, {method: 'GET'})
         .then(response => {
             if(response.ok) {
                 response.json().then(data => {
@@ -30,7 +30,7 @@ async function loggedUser() {
     userId = urlParams.get('id');
     // console.log(id)
 
-    await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
+    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
                 user = data

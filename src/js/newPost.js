@@ -122,7 +122,7 @@ function submit() {
 }
 
 async function newPost(data) {
-    await fetch(`http://localhost:3333/api/users/${userId}/post`, 
+    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/post`, 
     {
         method:"POST",
         headers: {

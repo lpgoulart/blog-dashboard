@@ -2,7 +2,7 @@ async function editForm(postId) {
 
     console.log(postId)
 
-    await fetch(`http://localhost:3333/api/users/${userId}/${postId}`, {method: 'GET'})
+    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/${postId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
                 post = data
@@ -117,7 +117,7 @@ async function editSinglePost(data, id) {
 
     // console.log(id)
 
-    await fetch(`http://localhost:3333/api/users/${userId}/${id}`, 
+    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/${id}`, 
     {
         method:"PUT",
         headers: {
