@@ -3,30 +3,30 @@ function newPostForm() {
     const div = document.getElementById('newForm')
 
     content = `
-    <div class="form">
-        <div style="width: 100%; margin-bottom: 10px">
-            <input type="text" placeholder="Cover Image: URL" id="img">
-            <div class="caption" id="newImgCaption"></div>
+        <div class="form">
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" placeholder="Cover Image: URL" id="img">
+                <div class="caption" id="newImgCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" placeholder="title" id="title">
+                <div class="caption" id="newTitleCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <textarea placeholder="simple description" id="brief" rows="4"></textarea>
+                <div class="caption" id="newBriefCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <div id="content"></div> 
+                <div class="caption" id="newPostCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" id="refs" placeholder="content type">
+                <div class="caption" id="newTypeCaption"></div>
+            </div>  
+            <button id="submitNewForm" class="edit" onclick="submit()">submit</button>
+            <div style="text-align:center; margin-top: 10px"><button class="delete" onclick="navigate('posts')">Cancelar</button></div>
         </div>
-        <div style="width: 100%; margin-bottom: 10px">
-            <input type="text" placeholder="title" id="title">
-            <div class="caption" id="newTitleCaption"></div>
-        </div>
-        <div style="width: 100%; margin-bottom: 10px">
-            <textarea placeholder="simple description" id="brief" rows="4"></textarea>
-            <div class="caption" id="newBriefCaption"></div>
-        </div>
-        <div style="width: 100%; margin-bottom: 10px">
-            <div id="content"></div> 
-            <div class="caption" id="newPostCaption"></div>
-        </div>
-        <div style="width: 100%; margin-bottom: 10px">
-            <input type="text" id="refs" placeholder="content type">
-            <div class="caption" id="newTypeCaption"></div>
-        </div>  
-        <button id="submitNewForm" class="edit" onclick="submit()">submit</button>
-        <div style="text-align:center; margin-top: 10px"><button class="delete" onclick="navigate('posts')">Cancelar</button></div>
-    </div>
     `
 
     div.innerHTML = content
