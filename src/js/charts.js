@@ -122,6 +122,9 @@ function populateLineChart(data, label) {
   },
   xaxis: {
     categories:label,
+    labels:{
+      show:true
+    },
     title: {
       text: 'Months'
     }

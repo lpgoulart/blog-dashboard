@@ -12,11 +12,26 @@ async function editForm(postId) {
     const div = document.getElementById('form')
     const content = `
         <div class="form">
-            <input type="text" placeholder="Cover Image: URL" id="imgEdited" value="${post.img}">
-            <input type="text" placeholder="title" id="titleEdited" value="${post.title}"> 
-            <textarea placeholder="simple description" id="briefEdited" rows="4">${post.brief}</textarea>
-            <div id="contentEdit"></div> 
-            <input type="text" id="refsEdited" placeholder="Content type" value="${post.type}"> 
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" placeholder="Cover Image: URL" id="imgEdited" value="${post.img}">
+                <div class="caption" id="editImgCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" placeholder="title" id="titleEdited" value="${post.title}"> 
+                <div class="caption" id="editTitleCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <textarea placeholder="simple description" id="briefEdited" rows="4">${post.brief}</textarea>
+                <div class="caption" id="editBriefCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <div id="contentEdit"></div> 
+                <div class="caption" id="editPostCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" id="refsEdited" placeholder="Content type" value="${post.type}"> 
+                <div class="caption" id="editTypeCaption"></div>
+            </div>  
             <button id="submitFormEdited" class="edit" onclick="submitEdited('${postId}')">Salvar Edição</button>
             <div style="text-align:center; margin-top: 10px"><button class="delete" onclick="navigate('posts')">Cancelar</button></div>
         </div>
@@ -54,9 +69,48 @@ async function submitEdited(id) {
         img: _img,
         type: _type
     }
-    navigate('posts')
-    editSinglePost(data, id)
-    
+
+    if(document.getElementById('submitNewForm').innerHTML === "Salvar assim mesmo" && _title != "") {
+        navigate('posts')
+        editSinglePost(data, id)
+    }
+
+    if( _img == '' ){
+        document.getElementById('editImgCaption').innerHTML = "*Imagem do Post vazio, se o campo estiver será usada uma imagem padrão"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('editImgCaption').innerHTML = ""
+    }
+    if( _title == '' ){
+        document.getElementById('editTitleCaption').innerHTML = "*Obrigatório. Título do Post vazio"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('editTitleCaption').innerHTML = ""
+    }
+    if( _brief == '' ){
+        document.getElementById('editBriefCaption').innerHTML = "*Resumo do post vazio"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('editBriefCaption').innerHTML = ""
+    }
+    if( quill.root.innerHTML == '<p><br></p>' ){
+        document.getElementById('editPostCaption').innerHTML = "*Conteúdo do Post vazio"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('editPostCaption').innerHTML = ""
+    }
+    if( _type == '' ){
+        document.getElementById('editTypeCaption').innerHTML = "*Post será salvo como categoria 'Geral'"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('editTypeCaption').innerHTML = ""
+    }
+
 }
 
 async function editSinglePost(data, id) {

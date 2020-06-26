@@ -176,18 +176,26 @@ footer {
     display: flex;
     flex-direction: column;
     margin: auto;
+    
+    .caption {
+        font-size: 12px;
+        color: red;
+        margin-top: 3px;
+    }
 
     input {
-        margin: 10px 0;
+        // margin-top: 10px;
         padding: 10px;
         border-radius: 5px;
         border: 0;
+        width: 100%;
     }
     textarea {
-        margin-bottom: 10px;
+        // margin-top: 10px;
         padding: 10px;
         border-radius: 5px;
         border: 0;
+        width: 100%;
     }
     button {
         padding: 10px;
@@ -195,11 +203,12 @@ footer {
         border: 1px solid #e8e8e8;
     }
     #content {
-        height: 300px;
+        height: 280px;
         overflow: auto;
+        margin-bottom: 10px;
     }
     #contentEdit {
-        height: 300px;
+        height: 280px;
         overflow: auto;
     }
 }
@@ -228,6 +237,7 @@ footer {
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
