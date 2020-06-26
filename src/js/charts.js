@@ -13,6 +13,7 @@ async function loadTypes() {
   await fetch(`http://localhost:3333/api/users/${userId}`, {method: 'GET'})
     .then(response => response.json()
         .then(data => {
+            user = data
             postsArray = data.posts.items
         })
     )
@@ -48,13 +49,17 @@ async function loadTypes() {
 
   const content = 
   `
-    <div style="min-height: 350px; width: 40%;">
+    <div style="min-height: 260px; width: 40%;">
       <h3>Posts por conteudo</h3>
       <div id="chart"></div>
     </div>
-    <div style="min-height: 350px; width: 60%!important;">
+    <div style="min-height: 260px; width: 60%!important;">
       <h3>Posts por mes</h3>
       <div id="timeline"></div>
+    </div>
+    <div style="min-height: 260px; width: 100%!important;">
+      <h3 style="text-align: center">Total do plano consumido</h3>
+      <div id="gaugeChart"></div>
     </div>
   `
 
@@ -62,6 +67,7 @@ async function loadTypes() {
 
   populatePieChart(pieData, pieLabel)
   populateLineChart(lineData, lineLabel)
+  populateGaugeChart(user.plan_total, user.posts.items_total)
 
 }
 
@@ -74,7 +80,7 @@ function populatePieChart(data, label) {
     },
     chart: {
     width: "80%",
-    height: 350,
+    height: 260,
     type: 'pie',
   },
   labels: label,
@@ -95,7 +101,6 @@ function populatePieChart(data, label) {
   chart.render();
 }
 
-
 function populateLineChart(data, label) {
 
   var options = {
@@ -104,7 +109,7 @@ function populateLineChart(data, label) {
     }],
     chart: {
     type: 'bar',
-    height: 350,
+    height: 260,
     width: '100%'
   },
   plotOptions: {
@@ -152,3 +157,82 @@ function populateLineChart(data, label) {
   
 }
 
+function populateGaugeChart(total, posts) {
+  usage = (posts*100)/total
+
+  if( usage < 70 ) {
+    color = 'rgb(0, 143, 251)'
+  }
+  else if ( usage >= 70 && usage < 90 ) {
+    color = 'rgb(254, 176, 25)'
+  }
+  else {
+    color = '#F44336'
+  }
+
+  console.log(usage)
+  var options = {
+    fill: {
+      colors: [color]
+    },
+    series: [usage],
+    chart: {
+    height: 260,
+    type: 'radialBar',
+  },
+  plotOptions: {
+    radialBar: {
+      hollow: {
+        size: '70%',
+      }
+    },
+  },
+  labels: ['Plano Usado'],
+  };
+
+  // var options = {
+  //   series: [
+  //     {
+  //       name: "Desktops",
+  //       data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+  //     },
+  //     {
+  //       name: "phones",
+  //       data: [22, 11, 35, 41, 79, 32, 59, 100, 148]
+  //     },
+  //     {
+  //       name: "tvs",
+  //       data: [42, 21, 15, 31, 49, 32, 59, 150, 48]
+  //     }
+  //   ],
+  //   chart: {
+  //   height: 350,
+  //   type: 'line',
+  //   zoom: {
+  //     enabled: false
+  //   }
+  // },
+  // dataLabels: {
+  //   enabled: false
+  // },
+  // stroke: {
+  //   curve: 'straight'
+  // },
+  // title: {
+  //   text: 'Product Trends by Month',
+  //   align: 'left'
+  // },
+  // grid: {
+  //   row: {
+  //     colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+  //     opacity: 0.5
+  //   },
+  // },
+  // xaxis: {
+  //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+  // }
+  // };
+
+  var gauge = new ApexCharts(document.querySelector("#gaugeChart"), options);
+  gauge.render();
+}
