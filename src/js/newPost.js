@@ -55,11 +55,13 @@ function submit() {
         title: _title,
         brief: _brief,
         content: _content,
-        img: _img === "" ? "https://i.pinimg.com/originals/8c/3c/c1/8c3cc1d5271a13a40c65c76b145473d7.png" : _img,
+        img: _img === "" ? "https://i.pinimg.com/originals/57/bb/66/57bb66cb4895565d755910654a6b0c80.jpg" : _img,
         type: _type === "" ? "Geral" : _type
     }
 
-    if(document.getElementById('submitNewForm').innerHTML === "Salvar assim mesmo" && _title != "") {
+    const form = document.getElementById('submitNewForm')
+
+    if(form.innerHTML === "Salvar assim mesmo" && _title != "") {
         navigate('posts')
         newPost(data)
     }
@@ -98,6 +100,11 @@ function submit() {
     }
     else {
         document.getElementById('newTypeCaption').innerHTML = ""
+    }
+
+    if(form.innerHTML === "submit") {
+        navigate('posts')
+        newPost(data)
     }
 
     

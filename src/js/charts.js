@@ -48,14 +48,14 @@ async function loadTypes() {
 
   const content = 
   `
-  <div style="height: 350px; width: 40%;">
-    <h3>Posts por tipo de conteudo</h3>
-    <div id="chart"></div>
-  </div>
-  <div style="height: 350px; width: 60%!important;">
-    <h3>Posts por mes</h3>
-    <div id="timeline"></div>
-  </div>
+    <div style="min-height: 350px; width: 40%;">
+      <h3>Posts por conteudo</h3>
+      <div id="chart"></div>
+    </div>
+    <div style="min-height: 350px; width: 60%!important;">
+      <h3>Posts por mes</h3>
+      <div id="timeline"></div>
+    </div>
   `
 
   document.getElementById('charts').innerHTML = content
@@ -104,7 +104,8 @@ function populateLineChart(data, label) {
     }],
     chart: {
     type: 'bar',
-    height: 350
+    height: 350,
+    width: '100%'
   },
   plotOptions: {
     bar: {
@@ -140,9 +141,9 @@ function populateLineChart(data, label) {
   tooltip: {
     y: {
       formatter: function (val) {
-        return "$ " + val + " thousands"
-      }
-    }
+        return val + " posts"
+      },
+    },
   }
   };
   

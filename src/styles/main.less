@@ -86,9 +86,13 @@ main {
     transition: all .5s;
 }
 
-.w-main-100 {
-    width: calc(100vw - 100px);
+#welcome, #allPosts, #editPost, #newPostDiv, #configurations {
+    padding: 20px;
 }
+
+// .w-main-100 {
+//     width: calc(100vw - 100px);
+// }
 
 #postsHere {
     display: flex;
@@ -170,7 +174,6 @@ footer {
         background: #a80917;
     }
 }
-
 .form {
     width: 800px;
     display: flex;
@@ -212,7 +215,6 @@ footer {
         overflow: auto;
     }
 }
-
 #userConfig {
     display: flex;
     flex-direction: column;
@@ -237,7 +239,9 @@ footer {
     justify-content: flex-start;
     align-items: flex-start;
 }
-
+#chart, #timeline {
+    min-height: 350px;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
