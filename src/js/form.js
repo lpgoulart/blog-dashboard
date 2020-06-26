@@ -95,7 +95,7 @@ async function getConfig() {
             <span>${user.username}</span>
         </div>
         <div class="userInfo">
-            <span><strong>Num. de posts:</strong> ${user.posts.items_total}</span>
+            <span><strong>Num. de posts:</strong> ${user.posts.items_total}/${user.plan_total}</span>
             <span><strong>Nome do Blog:</strong> ${user.content_type}</span>
         </div>
         <div style="text-align:center">
