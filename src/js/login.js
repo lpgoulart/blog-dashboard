@@ -4,7 +4,7 @@ async function login() {
     error.style.display = "block"
 
     if(id != "") {
-        await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${id}`, {method: 'GET'})
+        await fetch(`http://.../api/users/${id}`, {method: 'GET'})
         .then(response => {
             if(response.ok) {
                 response.json().then(data => {
@@ -28,9 +28,9 @@ async function login() {
 async function loggedUser() {
     const urlParams = new URLSearchParams(window.location.search);
     userId = urlParams.get('id');
-    // console.log(id)
+    // console.log(userId)
 
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}`, {method: 'GET'})
+    await fetch(`http://.../api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
                 user = data

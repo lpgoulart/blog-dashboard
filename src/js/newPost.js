@@ -19,6 +19,10 @@ async function newPostForm() {
                     <div class="caption" id="newImgCaption"></div>
                 </div>
                 <div style="width: 100%; margin-bottom: 10px">
+                    <input type="text" placeholder="Video URL" id="video">
+                    <div class="caption" id="newVideoCaption"></div>
+                </div>
+                <div style="width: 100%; margin-bottom: 10px">
                     <input type="text" placeholder="title" id="title">
                     <div class="caption" id="newTitleCaption"></div>
                 </div>
@@ -60,6 +64,7 @@ function submit() {
     _brief = document.getElementById('brief').value
     _content = quill.root.innerHTML
     _img = document.getElementById('img').value
+    _video = document.getElementById('video').value
     _type = document.getElementById('refs').value
 
     data = {
@@ -67,12 +72,13 @@ function submit() {
         brief: _brief,
         content: _content,
         img: _img === "" ? "https://i.pinimg.com/originals/57/bb/66/57bb66cb4895565d755910654a6b0c80.jpg" : _img,
-        type: _type === "" ? "Geral" : _type
+        type: _type === "" ? "Geral" : _type,
+        video: _video
     }
-
+    console.log(data)
     const form = document.getElementById('submitNewForm')
 
-    if(form.innerHTML === "Salvar assim mesmo" && _title != "") {
+    if(form.innerHTML === "Salvar assim mesmo" && _title != ""  && _video != "") {
         navigate('posts')
         newPost(data)
     }
@@ -83,6 +89,13 @@ function submit() {
     }
     else {
         document.getElementById('newImgCaption').innerHTML = ""
+    }
+    if( _video == '' ){
+        document.getElementById('newVideoCaption').innerHTML = "*Obrigatório. Video Url vazio"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('newVideoCaption').innerHTML = ""
     }
     if( _title == '' ){
         document.getElementById('newTitleCaption').innerHTML = "*Obrigatório. Título do Post vazio"
@@ -122,7 +135,7 @@ function submit() {
 }
 
 async function newPost(data) {
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/post`, 
+    await fetch(`http://.../api/users/${userId}/post`, 
     {
         method:"POST",
         headers: {

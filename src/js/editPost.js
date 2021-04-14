@@ -2,7 +2,7 @@ async function editForm(postId) {
 
     console.log(postId)
 
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/${postId}`, {method: 'GET'})
+    await fetch(`http://.../api/users/${userId}/${postId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
                 post = data
@@ -15,6 +15,10 @@ async function editForm(postId) {
             <div style="width: 100%; margin-bottom: 10px">
                 <input type="text" placeholder="Cover Image: URL" id="imgEdited" value="${post.img}">
                 <div class="caption" id="editImgCaption"></div>
+            </div>
+            <div style="width: 100%; margin-bottom: 10px">
+                <input type="text" placeholder="Video URL" id="video" value="${post.video}">
+                <div class="caption" id="newVideoCaption"></div>
             </div>
             <div style="width: 100%; margin-bottom: 10px">
                 <input type="text" placeholder="title" id="titleEdited" value="${post.title}"> 
@@ -53,6 +57,7 @@ async function editForm(postId) {
 }
 async function submitEdited(id) {
     _title = document.getElementById('titleEdited').value
+    _video = document.getElementById('video').value
     _brief = document.getElementById('briefEdited').value
     _content = quill.root.innerHTML
     _img = document.getElementById('imgEdited').value
@@ -65,6 +70,7 @@ async function submitEdited(id) {
         createdAt: post.createdAt,
         title: _title,
         brief: _brief,
+        video: _video,
         content: _content,
         img: _img,
         type: _type
@@ -81,6 +87,13 @@ async function submitEdited(id) {
     }
     else {
         document.getElementById('editImgCaption').innerHTML = ""
+    }
+    if( _video == '' ){
+        document.getElementById('newVideoCaption').innerHTML = "*Obrigatório. Video Url vazio"
+        document.getElementById('submitNewForm').innerHTML = "Salvar assim mesmo"
+    }
+    else {
+        document.getElementById('newVideoCaption').innerHTML = ""
     }
     if( _title == '' ){
         document.getElementById('editTitleCaption').innerHTML = "*Obrigatório. Título do Post vazio"
@@ -117,7 +130,7 @@ async function editSinglePost(data, id) {
 
     // console.log(id)
 
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/${id}`, 
+    await fetch(`http://.../api/users/${userId}/${id}`, 
     {
         method:"PUT",
         headers: {

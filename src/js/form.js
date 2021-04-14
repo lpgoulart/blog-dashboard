@@ -76,7 +76,7 @@ async function getConfig() {
     const urlParams = new URLSearchParams(window.location.search);
     userId = urlParams.get('id');
 
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}`, {method: 'GET'})
+    await fetch(`http://.../api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
                 user = data
@@ -110,10 +110,9 @@ async function getConfig() {
 
 async function fetchData() {
     // console.log(userId)
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}`, {method: 'GET'})
+    await fetch(`http://.../api/users/${userId}`, {method: 'GET'})
         .then(response => response.json()
             .then(data => {
-                // console.log(data)
                 addPost(data.posts.items)
             })
         )
@@ -145,7 +144,7 @@ function addPost(post) {
 }
 
 async function excluir(postId) {
-    await fetch(`https://lpgoulart-blog-api.herokuapp.com/api/users/${userId}/${postId}`, {method: 'DELETE'})
+    await fetch(`http://.../api/users/${userId}/${postId}`, {method: 'DELETE'})
     document.getElementById('postsHere').innerHTML = ""
     fetchData()
 
